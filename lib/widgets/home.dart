@@ -28,41 +28,45 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: ListView.builder(
-          itemCount: listOfActivities.length,
-          itemBuilder: (context, i) {
-            Activite activite = listOfActivities[i];
-            String key = activite.nom;
-            return Card(
-              elevation: 5.0,
-              child: Dismissible(
-                key: Key(key),
-                child: ListTile(
-                  title: Text("Activite : ${activite.nom}"),
-                  trailing: Icon(activite.icon),
-                ),
-                background: Container(
-                  padding: EdgeInsets.only(right: 15.0),
-                  color: Colors.red,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text("Supprimer", style: TextStyle(color: Colors.white)
+            itemCount: listOfActivities.length,
+            itemBuilder: (context, i) {
+              Activite activite = listOfActivities[i];
+              String key = activite.nom;
+              return InkWell(
+                onTap: () => print("tap"),
+                onDoubleTap: () => print("tap tap"),
+                child: Card(
+                  elevation: 5.0,
+                  child: Dismissible(
+                    key: Key(key),
+                    child: ListTile(
+                      title: Text("Activite : ${activite.nom}"),
+                      trailing: Icon(activite.icon),
+                    ),
+                    background: Container(
+                      padding: EdgeInsets.only(right: 15.0),
+                      color: Colors.red,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text("Supprimer", style: TextStyle(color: Colors.white)
+                          ),
+                          Icon(
+                            Icons.delete,
+                            color: Colors.white,
+                          ),
+                        ],
                       ),
-                      Icon(
-                        Icons.delete,
-                        color: Colors.white,
-                      ),
-                    ],
+                    ),
+                    onDismissed: (direction) {
+                      setState(() {
+                        listOfActivities.removeAt(i);
+                      });
+                    },
                   ),
                 ),
-                onDismissed: (direction) {
-                  setState(() {
-                    listOfActivities.removeAt(i);
-                  });
-                },
-              ),
-            );
-          }),
+              );
+            }),
       ),
       /* SINGLESCROLLVIEW
       body: SingleChildScrollView(
