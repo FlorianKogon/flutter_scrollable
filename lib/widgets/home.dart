@@ -22,6 +22,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    Orientation orientation = MediaQuery.of(context).orientation;
+    print(orientation);
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
